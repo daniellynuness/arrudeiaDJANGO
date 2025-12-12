@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Spline+Sans+Mono:ital,wght@0,300..700;1,300..700&display=swap"
+        rel="stylesheet">
+    <link rel="icon" href="{% static 'img/logo colorida 1.png' %}" type="image/x-icon">
+    <link rel="shortcut icon" href="{% static 'img/logo colorida 1.png' %}" type="image/x-icon">
+    <title>Arrudeia - Login</title>
+</head>
+
+<body>
+    <main class="main_login">
+        <div class="container">
+            <form action="{% url 'login' %}" method="POST" class="login-box active">
+                <div class="cad">
+                    <h2><a href="{% url 'cadastro' %}" class="link">CADASTRO</a></h2>
+                    <img class="logo" src="{% static 'img/logo colorida 1.png' %}" alt="logo">
+                    <h2><a href="{% url 'index' %}" class="link">INÍCIO</a></h2>  
+                </div>
+                {% csrf_token %}
+                {% if messages %}
+                    <div class="messages">
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                <div class="input-group">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" name="email" placeholder="Digite seu e-mail" required>
+                </div>
+                <div class="input-group">
+                    <label for="senha">Senha</label>
+                    <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required>
+                </div>
+                <button type="submit">Entrar</button>
+            </form>
+        </div>
+        <div class="bk"></div>
+    </main>
+</body>
+
+</html>
+<script src="js/theme_toggle.js"></script>
+<script>
+    const abaLogin = document.getElementById("abaLogin");
+    const abaCadastro = document.getElementById("abaCadastro");
+    const formLogin = document.getElementById("formLogin");
+    const formCadastro = document.getElementById("formCadastro");
+
+    abaLogin.onclick = () => {
+        abaLogin.classList.add("active");
+        abaCadastro.classList.remove("active");
+        formLogin.classList.add("active");
+        formCadastro.classList.remove("active");
+    };
+
+    abaCadastro.onclick = () => {
+        abaCadastro.classList.add("active");
+        abaLogin.classList.remove("active");
+        formCadastro.classList.add("active");
+        formLogin.classList.remove("active");
+    };
+</script>
+
+</html>
